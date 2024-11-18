@@ -1,10 +1,81 @@
 
 const apiKey = `0b55bb5a11fac5228bf4200c0314cd31`;
-async function getWeather(city) {
+
+const x = document.getElementById('city-input').value;
+function resetUI(){
+    document.getElementById('city-name').innerText = "fetching location...";
+    document.getElementById('temp').innerText = "";
+    document.getElementById('feels-like').innerText ="";
+    document.getElementById('description').innerText = "";
+    document.getElementById('wind-speed').innerText = "";
+    document.getElementById('humidity').innerText = "";
+    document.getElementById('weather-icon').className = "fetching data";
+    document.getElementById('weather-icon').style.color = "fetching data";
+    document.getElementById('b').style.backgroundImage = "fetching data";
+}
+function getLocation() {
+    resetUI();
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(showPosition,showError,{
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+        });
+
+    }else{
+        alert("geolocation not found...")
+    }
+}
+function showPosition(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    const accuracy = position.coords.accuracy;
+    console.log(`Latitude:${latitude}, Longitude:${longitude}, Accuracy:${accuracy}`);
+    getWeatherByCoords(latitude, longitude);
+
+}
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            alert("User  denied the request for Geolocation.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            alert("Location information is unavailable.");
+            break;
+        case error.TIMEOUT:
+            alert("The request to get user location timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            alert("An unknown error occurred.");
+            break;
+    }
+}
+async function getWeatherByCoords(latitude, longitude) {
+    try {
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        updateWeatherUI(data);
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+        alert('Failed to fetch weather data. Please try again later.');
+    }
+}
+async function getWeather() {
+    try{
+        const city = document.getElementById('city-input').value;
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${city}&appid=${apiKey}`;
         const response = await fetch(apiUrl);
         const data = await response.json();
+        updateWeatherUI(data);
         console.log(data);
+    } catch (error){
+        console.error('Error fetching weather data:', error);
+        alert('Failed to fetch weather data. please try again later.')
+    }
+}
+function updateWeatherUI(data) {
             document.getElementById('city-name').innerText = data.name;
             document.getElementById('temp').innerText = Math.round(data.main.temp) + `°C`;
             document.getElementById('feels-like').innerText = `Feels like ` + Math.round(data.main.feels_like) + `°C`;
@@ -73,7 +144,7 @@ function getBackgroundImage(iconCode) {
         '04n': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk7GqVZTlg-_ek2KH6GpEDrj9BdiGgdAVcMg&s',
         '09d': 'https://images.news18.com/ibnlive/uploads/2021/07/1627056776_clouds-1600x1200.jpg?impolicy=website&width=640&height=480',
         '09n': 'https://images.news18.com/ibnlive/uploads/2021/07/1627056776_clouds-1600x1200.jpg?impolicy=website&width=640&height=480',
-        '10d': 'https://t3.ftcdn.net/jpg/01/19/10/00/360_F_119100073_bbP1qP0Nq2YRUtfE5DfFEEXtsMjLdNu5.jpg',
+        '10d': 'https://wallpaperaccess.com/full/1379508.jpg',
         '10n': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf9aF1pD1_OB70ytGuXPZji3uaRtazRRfHdQ&s',
         '11d': 'https://images.news18.com/ibnlive/uploads/2021/07/1627056776_clouds-1600x1200.jpg?impolicy=website&width=640&height=480',
         '11n': 'https://images.news18.com/ibnlive/uploads/2021/07/1627056776_clouds-1600x1200.jpg?impolicy=website&width=640&height=480',
@@ -84,18 +155,28 @@ function getBackgroundImage(iconCode) {
     };
     return backgroundMap[iconCode] || 'https://i.pinimg.com/736x/87/29/37/8729376a8539051c2e2b0bf8fff88374.jpg';
 }
-document.getElementById('city-input-btn').addEventListener('click',()=> {const city = document.getElementById('city-input').value || 'Crawley';
+document.getElementById('city-input-btn').addEventListener('click',()=> {const city = document.getElementById('city-input').value|| 'horley';
+    getWeather(city);
+});
+
+document.querySelector('#get-location-btn').addEventListener('click', ()=> {
+    getLocation();
+    console.log('Executed GetLocation')
+});
 
 function displayCurrentDate() {
     var today = new Date();
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     var currentDate = today.toLocaleDateString('en-uk',options);
-    document.getElementById('h1').innerText = currentDate;
+    document.querySelector('.date-p').textContent = currentDate;
     document.getElementById('h2').innerText = currentDate;
-}
-displayCurrentDate(); 
-getWeather(city);});
-getWeather ('crawley') ;
+    console.log(currentDate);
+} 
+document.addEventListener('DOMContentLoaded', () => {
+    displayCurrentDate();
+    getWeather();
+    getLocation();
+});
 
 
 

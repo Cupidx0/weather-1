@@ -22,7 +22,6 @@ html{
     justify-content:center;
     overflow:hidden;
     margin-right: 10%;
-
 }
 #city-input {
     padding: 15px;
@@ -51,11 +50,21 @@ html{
     font-size: 16px;
     cursor: pointer;
 }
- 
+#get-location-btn {
+    padding: 10px;
+    background-color: #2196F3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
 #city-input-btn:hover {
     background-color: #1565C0;
 }
- 
+#get-location-btn:hover {
+    background-color: #1565C0;
+}
 #weather-info {
     display: none;
 }
@@ -190,11 +199,15 @@ div.scroll-container img {
 .box{
     border-radius: 4%;
     padding: 10%;
-    background-color: #a9a9a948;
+    background:linear-gradient(to right,rgb(93, 108, 134),rgb(95, 129, 196));
     color: black;
     a{
         color: black;
     }
+}
+.box h2{
+    margin-top:0;
+    color: #A9A9A9;
 }
 ul{
     list-style-type: none;
@@ -215,8 +228,10 @@ li{
     border-radius: 4px;
     background-color:rgba(128, 128, 128, 0.195);
     width: 100vw;
+    height:auto;
     align-items: center;
     justify-content: center;
     overflow:hidden;
     background-size: cover;
+    background-repeat: no-repeat;
 }
