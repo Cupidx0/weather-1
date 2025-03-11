@@ -3,6 +3,21 @@ html{
     overflow-x: hidden;
     margin-right: 100%;
 }
+@media screen and (max-width: 600px) {
+    .weathercontainer{
+        display: inline-block;
+        gap: 2%;
+    }
+    .box{
+        display: block;
+        max-height:30%;
+        gap: 5%;
+    }
+    #weather{
+        display: block;
+        gap: 5%;
+    }
+}
 .body{
     background-color: #A9A9A9;
     overflow:hidden;
@@ -19,13 +34,15 @@ html{
     background-color:rgba(128, 128, 128, 0.195);
     max-width:100vw;
     align-items: center;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
     justify-content:center;
-    overflow:hidden;
+    overflow-Y:auto;
     margin-right: 10%;
 }
 #city-input {
-    padding: 15px;
-    margin: 10px;
+    padding: 5px;
+    margin: 5px;
     width:auto;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -123,14 +140,21 @@ html{
     color: rgb(255, 0, 0);
 }
 .stocks{
-    padding: 10px;
-    border-radius: 4px;
+    padding: 5%;
+    border-radius: 5%;
     background-color: inherit;
-    width:fit-content;
+    width:auto;
+    left:0;
     align-items: center;
 }
 .stock{
-    background:linear-gradient(to left,rgba(85, 85, 150, 0.661),rgb(112, 106, 72),rgb(44, 91, 150)) !important;   
+    padding: 5%;
+    border-radius: 5px;
+    width:auto;
+    position: relative;
+    margin-left:-1%;
+    margin-top: 10px;
+    background:linear-gradient(to left,rgba(64, 64, 64, 0.661),rgb(202, 201, 201),rgb(37, 46, 56)) !important;   
 }
 .date{
     margin-bottom: 10%;
@@ -195,12 +219,43 @@ div.scroll-container img {
     display: flex;
     gap: 2%;
     left: 0%;
+    background-size: cover;
+    padding: 10px;
+    object-fit: cover;
+    backdrop-filter: blur(0);
+    image-rendering: optimizeQuality;
+    background-position: center;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    height:100vh;
 }
 .box{
-    border-radius: 4%;
-    padding: 10%;
-    background:linear-gradient(to right,rgb(93, 108, 134),rgb(95, 129, 196));
+    border-radius: 4px;
+    padding: 10px;
+    width: auto;
+    max-width: 30vw;
+    height: auto;
+    max-height: 100vh;
+    gap:3%;
+    background:linear-gradient(to right,rgba(93, 108, 134, 0.424),rgb(95, 129, 196));
     color: black;
+    overflow: scroll;
+    a{
+        color: black;
+    }
+}
+.box1{
+    border-radius: 4px;
+    padding: 10px;
+    width: auto;
+    height: auto;
+    max-height: 100vh;
+    gap:5%;
+    background:linear-gradient(to right,rgba(93, 108, 134, 0.239),rgba(95, 129, 196, 0.194));
+    color: black;
+    scrollbar-width: none;
+    cursor:grabbing;
+    overflow: scroll;
     a{
         color: black;
     }
@@ -214,7 +269,9 @@ ul{
     padding: 5%;
     text-align:left;
     max-width:100vw;
+    gap:10%;
     justify-content: space-around;
+    border-radius: 5%;
 }
 li{
     border-radius: 4%;
@@ -234,4 +291,32 @@ li{
     overflow:hidden;
     background-size: cover;
     background-repeat: no-repeat;
+}
+#newslists{
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10%;
+    background-color:rgba(128, 128, 128, 0.195);
+    gap: 10%;
+}
+.stock-card{
+    display: grid;
+    grid-template-rows: auto 50px 3fr;
+    padding: 5px;
+    border-radius: 5px;
+    border-color: #A9A9A9;
+    border-style: solid;
+}
+#stockdatar{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 2%;
+    overflow-y: scroll;
+}
+#future-weather{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
 }

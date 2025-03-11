@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="200">
+    <meta http-equiv="refresh" content="1000">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://kit.fontawesome.com/0c67618d33.js" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>weather/stocks</title>
 </head>
 <body id="displayWeather">
     <div id="b">
-        <h1>weather</h1>
         <div class="weathercontainer">
             <div class="box">
                 <h2>trending & news</h2>
-                <ul>
-                </ul>
+                <ul id="newslists">fetching news data...</ul>
             </div>
             <div id="weather">
                 <h1>weather</h1>
@@ -44,17 +42,21 @@
                         <p id="wind-speed"></p>
                     </div>
                 </div>
+                <div class="box1">
+                    <p>future 5 days weather</p>
+                    <div id="future-weather">fetching future weather prediction</div>
+                </div>
             </div>
         </div>
         <div class="stock">
             <h1>Stocks</h1>
             <div class="stocks">
-                <p id="h2"></p>
-                <script src="java.js"></script>
+                <div id="stockdatar">stock</div>
                 <br>
             </div>
         </div>
     </div>
-<script src="java.js"></script>
 </body>
+<script src="java.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </html>
