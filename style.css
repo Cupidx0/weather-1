@@ -5,17 +5,17 @@ html{
 }
 @media screen and (max-width: 600px) {
     .weathercontainer{
-        display: inline-block;
-        gap: 2%;
+        display:block !important;
+        gap:5% !important;
+        height: 100% !important;
     }
     .box{
         display: block;
         max-height:30%;
-        gap: 5%;
+        max-width: 80% !important;
     }
     #weather{
         display: block;
-        gap: 5%;
     }
 }
 .body{
