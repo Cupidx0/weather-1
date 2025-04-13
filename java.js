@@ -309,3 +309,11 @@ function fetchTrendingstocks() {
         })
         .catch(error => console.error("Error fetching stock data:", error));
 }fetchTrendingstocks();
+function findYear(){
+    const yearr = document.getElementById('yearr');
+    const todayy = new Date();
+    const fyearr = todayy.getFullYear()+1;
+    yearr.innerHTML = fyearr;
+    console.log(fyearr);
+}
+findYear();
